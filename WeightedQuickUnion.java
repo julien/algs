@@ -16,6 +16,9 @@ public class WeightedQuickUnion {
 
 	private int root(int i) {
 		while (i != id[i]) {
+			// Make every other node in path point
+			// to its grandparent
+			id[i] = id[id[i]];
 			i = id[i];
 		}
 		return i;
