@@ -1,5 +1,5 @@
 import edu.princeton.cs.algs4.StdIn;
-import edu.princeton.cs.algs4.StdOut
+import edu.princeton.cs.algs4.StdOut;
 
 public class QuickUnionUF {
 	private int[] id;
@@ -11,7 +11,7 @@ public class QuickUnionUF {
 	}
 
 	private int root(int i) {
-		while (i != id[i]) i = id[1];
+		while (i != id[i]) i = id[i];
 		return i;
 	}
 
