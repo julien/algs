@@ -16,8 +16,7 @@ public class WeightedQuickUnion {
 
 	private int root(int i) {
 		while (i != id[i]) {
-			// Make every other node in path point
-			// to its grandparent
+			// Make every other node in path point to its grandparent
 			id[i] = id[id[i]];
 			i = id[i];
 		}
@@ -38,6 +37,29 @@ public class WeightedQuickUnion {
 		else               { id[j] = i; sz[i] += sz[j]; }
 	}
 
+	void print() {
+		System.out.print("id: [ ");
+		for (int i = 0; i < id.length; i++) {
+			if (i < id.length - 1)
+				System.out.print(id[i] + ", ");
+			else
+				System.out.print(id[i]);
+		}
+		System.out.print(" ]");
+
+		System.out.println("");
+
+		System.out.print("sz: [ ");
+		for (int i = 0; i < sz.length; i++) {
+			if (i < sz.length - 1)
+				System.out.print(sz[i] + ", ");
+			else
+				System.out.print(sz[i]);
+		}
+		System.out.print(" ]");
+		System.out.println("");
+	}
+
 	public static void main(String[] args) {
 		int N = StdIn.readInt();
 		WeightedQuickUnion uf  = new WeightedQuickUnion(N);
@@ -49,5 +71,6 @@ public class WeightedQuickUnion {
 				StdOut.println(p + " " + q);
 			}
 		}
+		uf.print();
 	}
 }
