@@ -25,6 +25,12 @@ public class QuickUnionUF {
 		id[i] = j;
 	}
 
+	void print() {
+		for (int i = 0; i < id.length; i++)
+			System.out.print(id[i] + " ");
+		System.out.println("");
+	}
+
 	public static void main(String[] args) {
 		int N = StdIn.readInt();
 		QuickUnionUF uf  = new QuickUnionUF(N);
@@ -36,5 +42,6 @@ public class QuickUnionUF {
 				StdOut.println(p + " " + q);
 			}
 		}
+		uf.print();
 	}
 }
