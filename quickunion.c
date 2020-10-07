@@ -38,14 +38,17 @@ void quickunion_union(quickunion* qu, unsigned int p, unsigned int q) {
 }
 
 int main(void) {
+	int data[23] = {
+		4, 3, 3, 8, 6, 5, 9,
+		4, 2, 1, 8, 9, 5, 0,
+		7, 2, 6, 1, 1, 0, 6, 7
+	};
+
 	quickunion* qu = quickunion_create(10);
 
-	int size = 23;
-	int data[23] = { 4, 3, 3, 8, 6, 5, 9, 4, 2, 1, 8, 9, 5, 0, 7, 2, 6, 1, 1, 0, 6, 7 };
-
-	for (unsigned int i = 0; i < size - 1; i+=2) {
+	for (unsigned int i = 0; i < 22 - 1; i += 2) {
 		if (!quickunion_connected(qu, data[i], data[i + 1])) {
-			quickunion_union(qu, data[i], data[i+1]);
+			quickunion_union(qu, data[i], data[i + 1]);
 			printf("%d %d\n", data[i] , data[i + 1]);
 		}
 	}

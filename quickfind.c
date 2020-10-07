@@ -7,17 +7,16 @@ typedef struct quickfind {
 } quickfind;
 
 quickfind* quickfind_create(unsigned int n) {
-	int id[n];
-	for (unsigned int i = 0; i < n; i++) {
-		id[i] = i;
-	}
-
 	quickfind* qf = malloc(sizeof(quickfind));
 
 	if (qf == NULL) return NULL;
 
 	qf->capacity = n;
-	qf->id = id;
+
+	qf->id = malloc(n * sizeof(int));
+	for (unsigned int i = 0; i < n; i++) {
+		qf->id[i] = i;
+	}
 
 	return qf;
 }
@@ -35,14 +34,17 @@ void quickfind_union(quickfind* qf, unsigned int p, unsigned int q) {
 }
 
 int main(void) {
+	int data[23] = {
+		4, 3, 3, 8, 6, 5, 9,
+		4, 2, 1, 8, 9, 5, 0,
+		7, 2, 6, 1, 1, 0, 6, 7
+	};
+
 	quickfind* qf = quickfind_create(10);
 
-	int size = 23;
-	int data[23] = { 4, 3, 3, 8, 6, 5, 9, 4, 2, 1, 8, 9, 5, 0, 7, 2, 6, 1, 1, 0, 6, 7 };
-
-	for (unsigned int i = 0; i < size - 1; i+=2) {
+	for (unsigned int i = 0; i < 22; i += 2) {
 		if (!quickfind_connected(qf, data[i], data[i + 1])) {
-			quickfind_union(qf, data[i], data[i+1]);
+			quickfind_union(qf, data[i], data[i + 1]);
 			printf("%d %d\n", data[i] , data[i + 1]);
 		}
 	}
