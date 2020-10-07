@@ -7,17 +7,16 @@ typedef struct quickunion {
 } quickunion;
 
 quickunion* quickunion_create(unsigned int n) {
-	int id[n];
-	for (unsigned int i = 0; i < n; i++) {
-		id[i] = i;
-	}
-
 	quickunion* qu = malloc(sizeof(quickunion));
 
 	if (qu == NULL) return NULL;
 
 	qu->capacity = n;
-	qu->id = id;
+
+	qu->id = malloc(n * sizeof(int));
+	for (unsigned int i = 0; i < n; i++) {
+		qu->id[i] = i;
+	}
 
 	return qu;
 }
@@ -35,6 +34,11 @@ void quickunion_union(quickunion* qu, unsigned int p, unsigned int q) {
 	int i = quickunion_root(qu, p);
 	int j = quickunion_root(qu, q);
 	qu->id[i] = j;
+}
+
+void quickunion_free(quickunion* qu) {
+	if (qu->id != NULL) free(qu->id);
+	if (qu != NULL) free(qu);
 }
 
 int main(void) {
@@ -58,7 +62,7 @@ int main(void) {
 	}
 	printf("\n");
 
-	if (qu != NULL) free(qu);
+	quickunion_free(qu);
 
 	return 0;
 }

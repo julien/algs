@@ -51,6 +51,12 @@ void quickunion_union(quickunion* qu, unsigned int p, unsigned int q) {
 	}
 }
 
+void quickunion_free(quickunion* qu) {
+	if (qu->id != NULL) free(qu->id);
+	if (qu->sz != NULL) free(qu->sz);
+	if (qu != NULL) free(qu);
+}
+
 int main(void) {
 	int data[23] = {
 		4, 3, 3, 8, 6, 5, 9,
@@ -72,7 +78,7 @@ int main(void) {
 	}
 	printf("\n");
 
-	if (qu != NULL) free(qu);
+	quickunion_free(qu);
 
 	return 0;
 }

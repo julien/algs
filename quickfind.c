@@ -33,6 +33,11 @@ void quickfind_union(quickfind* qf, unsigned int p, unsigned int q) {
 		if (qf->id[i] == pid) qf->id[i] = qid;
 }
 
+void quickfind_free(quickfind* qf) {
+	if (qf->id != NULL) free(qf->id);
+	if (qf != NULL) free(qf);
+}
+
 int main(void) {
 	int data[23] = {
 		4, 3, 3, 8, 6, 5, 9,
@@ -54,7 +59,7 @@ int main(void) {
 	}
 	printf("\n");
 
-	if (qf != NULL) free(qf);
+	quickfind_free(qf);
 
 	return 0;
 }
