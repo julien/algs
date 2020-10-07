@@ -23,6 +23,12 @@ public class QuickFindUF {
 			if (id[i] == pid) id[i] = qid;
 	}
 
+	void print() {
+		for (int i = 0; i < id.length; i++)
+			System.out.print(id[i] + " ");
+		System.out.println();
+	}
+
 	public static void main(String[] args) {
 		int N = StdIn.readInt();
 		QuickFindUF uf  = new QuickFindUF(N);
@@ -34,5 +40,6 @@ public class QuickFindUF {
 				StdOut.println(p + " " + q);
 			}
 		}
+		uf.print();
 	}
 }
