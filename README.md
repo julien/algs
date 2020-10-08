@@ -7,13 +7,25 @@ Download [alg4.jar](https://algs4.cs.princeton.edu/code/)
 Compile with:
 
 ```sh
-javac FILENAME -cp ".:algs4.jar"
+javac -cp ".:algs4.jar" FILENAME
+```
+
+or
+
+```sh
+javac -cp ".:algs4.jar" FILENAME -d OUTPUT_DIRECTORY
 ```
 
 Run a program with:
 
 ```sh
 java -cp ".:algs4.jar" CLASSNAME < DATA
+```
+
+or
+
+```sh
+java -cp ".:algs4.jar:OUTPUT_DIRECTORY" CLASSNAME < DATA
 ```
 
 Debug with:
