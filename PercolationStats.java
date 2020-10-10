@@ -47,16 +47,17 @@ public final class PercolationStats {
 
     public static void main(String[] args) {
         int gridSize = 10;
-        int trialCount = 10;
+        int numTrials = 10;
+
         if (args.length >= 2) {
             gridSize = Integer.parseInt(args[0]);
-            trialCount = Integer.parseInt(args[1]);
+            numTrials = Integer.parseInt(args[1]);
         }
-        PercolationStats ps = new PercolationStats(gridSize, trialCount);
 
+        PercolationStats ps = new PercolationStats(gridSize, numTrials);
         String confidence = ps.confidenceLo() + ", " + ps.confidenceHi();
-        StdOut.println("mean                    = " + ps.mean());
-        StdOut.println("stddev                  = " + ps.stddev());
+        StdOut.println("mean = " + ps.mean());
+        StdOut.println("stddev = " + ps.stddev());
         StdOut.println("95% confidence interval = " + confidence);
     }
 
