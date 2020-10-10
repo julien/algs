@@ -1,7 +1,7 @@
 Exercises for the Algorithms course (parts 1 and 2) on Coursera
 
 
-Download [alg4.jar](https://algs4.cs.princeton.edu/code/)
+Download [alg4.jar](https://algs4.cs.princeton.edu/code/algs4.jar)
 
 
 Compile with:
