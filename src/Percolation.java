@@ -1,5 +1,7 @@
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public final class Percolation {
@@ -11,13 +13,9 @@ public final class Percolation {
 	private int virtualTop;
 	private int virtualBottom;
 
-	public Percolation(int n, int trials) {
+	public Percolation(int n) {
 		if (n <= 0) {
 			throw new IllegalArgumentException("n must be > 0");
-		}
-
-		if (trials <= 0) {
-			throw new IllegalArgumentException("trials must be > 0");
 		}
 
 		gridSize = n;
@@ -84,7 +82,7 @@ public final class Percolation {
 
 	public boolean isFull(int row, int col) {
 		validate(row, col);
-		return wquFull.find(virtualTop) != 0 && wquFull.find(mapToGrid(row, col) - 1) != 0;
+		return wquFull.connected(virtualTop, mapToGrid(row, col) - 1);
 	}
 
 	public int numberOfOpenSites() {
@@ -92,7 +90,7 @@ public final class Percolation {
 	}
 
 	public boolean percolates() {
-		return wquGrid.find(virtualTop) != 0 && wquGrid.find(virtualBottom) != 0;
+		return wquGrid.connected(virtualTop, virtualBottom);
 	}
 
 	private boolean isInBounds(int row, int col) {
@@ -114,12 +112,19 @@ public final class Percolation {
 	}
 
 	public static void main(String args[]) {
-		if (args.length < 2) {
-			return;
-		}
+        int size = Integer.parseInt(args[0]);
 
-		int n = Integer.parseInt(args[0]);
-		int t = Integer.parseInt(args[1]);
-		Percolation percolation = new Percolation(n, t);
+        Percolation percolation = new Percolation(size);
+
+        for (int i = 1; i < args.length; i += 2) {
+            int row = Integer.parseInt(args[i]);
+            int col = Integer.parseInt(args[i + 1]);
+
+            percolation.open(row, col);
+
+            if (percolation.percolates()) {
+                StdOut.printf("%nThe System percolates %n");
+            }
+        }
 	}
 }
