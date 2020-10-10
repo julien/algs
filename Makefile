@@ -5,7 +5,7 @@ $(bin): $(src)
 	javac -cp ".:algs4.jar" $(src) -d bin -g -Xlint:deprecation
 
 run: $(bin)
-	java -cp ".:algs4.jar:bin" Percolation
+	java -cp ".:algs4.jar:bin" Percolation 5 1 4 2 4 3 4 4 4 5 4
 
 debug: $(bin)
 	jdb -classpath ".:algs4.jar:bin" Percolation
