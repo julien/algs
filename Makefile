@@ -1,14 +1,14 @@
-bin?=bin
-src?=src/Percolation.java
+bin?=bin/PercolationStats.class
+src?=PercolationStats.java
 
 $(bin): $(src)
 	javac -cp ".:algs4.jar" $(src) -d bin -g -Xlint:deprecation
 
 run: $(bin)
-	java -cp ".:algs4.jar:bin" Percolation 5 1 4 2 4 3 4 4 4 5 4
+	java -cp ".:algs4.jar:bin" PercolationStats 1000 1000
 
 debug: $(bin)
-	jdb -classpath ".:algs4.jar:bin" Percolation
+	jdb -classpath ".:algs4.jar:bin" PercolationStats
 
 download_libs:
 	curl https://algs4.cs.princeton.edu/code/algs4.jar -o algs4.jar
@@ -18,4 +18,4 @@ tags: download_libs
 	ctags -R .
 
 clean:
-	rm -f bin/*.class
+	rm -rf bin
