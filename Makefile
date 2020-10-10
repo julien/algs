@@ -1,4 +1,4 @@
-bin?=bin/PercolationStats.class
+bin?=PercolationStats.class
 src?=PercolationStats.java
 
 $(bin): $(src)
@@ -18,4 +18,4 @@ tags: download_libs
 	ctags -R .
 
 clean:
-	rm -rf bin
+	rm -f $(bin)
