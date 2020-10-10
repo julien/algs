@@ -10,5 +10,12 @@ run: $(bin)
 debug: $(bin)
 	jdb -classpath ".:algs4.jar:bin" Percolation
 
+download_libs:
+	curl https://algs4.cs.princeton.edu/code/algs4.jar -o algs4.jar
+	unzip algs4.jar -d algs4
+
+tags: download_libs
+	ctags -R .
+
 clean:
 	rm -f bin/*.class
