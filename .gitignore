@@ -2,6 +2,6 @@
 *.jar
 *.out
 algs4/*
-bin/*
+libs/*
 tags
 out/*
