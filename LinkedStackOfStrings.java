@@ -10,12 +10,9 @@ public class LinkedStackOfStrings {
 
 	private Node first = null;
 
-	public LinkedStackOfStrings() { }
-
 	void push(String item) {
 		// Save link to the list
 		Node oldfirst = first;
-
 		// Create a new node for the beginning
 		first = new Node();
 		first.item = item;
@@ -25,10 +22,8 @@ public class LinkedStackOfStrings {
 	String pop() {
 		// Save item to return
 		String item = first.item;
-
 		// Delete the first node
 		first = first.next;
-
 		return item;
 	}
 
