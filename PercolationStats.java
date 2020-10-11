@@ -36,26 +36,26 @@ public final class PercolationStats {
 	}
 
 	public double confidenceLo() {
-        return mean() - ((1.96 * stddev()) / Math.sqrt(trials));
-    }
+		return mean() - ((1.96 * stddev()) / Math.sqrt(trials));
+	}
 
-    public double confidenceHi() {
-        return mean() + ((1.96 * stddev()) / Math.sqrt(trials));
-    }
+	public double confidenceHi() {
+		return mean() + ((1.96 * stddev()) / Math.sqrt(trials));
+	}
 
-    public static void main(String[] args) {
-        int n = 10;
-        int trials = 10;
+	public static void main(String[] args) {
+		int n = 10;
+		int trials = 10;
 
-        if (args.length >= 2) {
-            n = Integer.parseInt(args[0]);
-            trials = Integer.parseInt(args[1]);
-        }
+		if (args.length >= 2) {
+			n = Integer.parseInt(args[0]);
+			trials = Integer.parseInt(args[1]);
+		}
 
-        PercolationStats ps = new PercolationStats(n, trials);
-        String confidence = ps.confidenceLo() + ", " + ps.confidenceHi();
-        StdOut.println("mean = %d" + ps.mean());
-        StdOut.println("stddev = " + ps.stddev());
-        StdOut.println("95% confidence interval = " + confidence);
-    }
+		PercolationStats ps = new PercolationStats(n, trials);
+		String confidence = ps.confidenceLo() + ", " + ps.confidenceHi();
+		StdOut.println("mean = %d" + ps.mean());
+		StdOut.println("stddev = " + ps.stddev());
+		StdOut.println("95% confidence interval = " + confidence);
+	}
 }
