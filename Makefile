@@ -15,8 +15,3 @@ download_libs:
 	curl https://algs4.cs.princeton.edu/code/algs4.jar -o libs/algs4.jar
 	unzip libs/algs4.jar -d libs/algs4
 
-tags: download_libs
-	ctags -R .
-
-clean:
-	rm *.class
