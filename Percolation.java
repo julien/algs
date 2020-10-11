@@ -1,10 +1,7 @@
-import edu.princeton.cs.algs4.StdRandom;
-import edu.princeton.cs.algs4.StdStats;
-import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
-public final class Percolation {
+public class Percolation {
 	private boolean[][] grid;
 	private int gridSize;
 	private int openSites;
@@ -82,7 +79,7 @@ public final class Percolation {
 
 	public boolean isFull(int row, int col) {
 		validate(row, col);
-		return wquFull.connected(virtualTop, mapToGrid(row, col) - 1);
+		return wquFull.find(virtualTop) == wquFull.find(mapToGrid(row, col) - 1);
 	}
 
 	public int numberOfOpenSites() {
@@ -90,7 +87,7 @@ public final class Percolation {
 	}
 
 	public boolean percolates() {
-		return wquGrid.connected(virtualTop, virtualBottom);
+		return wquGrid.find(virtualTop) == wquGrid.find(virtualBottom);
 	}
 
 	private boolean isInBounds(int row, int col) {
@@ -123,7 +120,7 @@ public final class Percolation {
             percolation.open(row, col);
 
             if (percolation.percolates()) {
-                StdOut.printf("%nThe System percolates %n");
+                StdOut.printf("The System percolates");
             }
         }
 	}
