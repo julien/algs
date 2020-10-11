@@ -1,15 +1,13 @@
-bin?=LinkedStackOfStrings.class
-src?=LinkedStackOfStrings.java
 CLASSPATH=".:libs/algs4.jar"
 
-$(bin): $(src)
-	javac -cp $(CLASSPATH) $(src) -g -Xlint:deprecation -Xlint:unchecked
+compile:
+	javac -cp $(CLASSPATH) FixedCapacityStackOfStrings.java -g -Xlint:deprecation -Xlint:unchecked
 
-run: $(bin)
-	java -cp $(CLASSPATH) LinkedStackOfStrings < tobe.txt
+run: compile
+	java -cp $(CLASSPATH) FixedCapacityStackOfStrings < tobe.txt
 
-debug: $(bin)
-	jdb -classpath $(CLASSPATH) LinkedStackOfStrings
+debug: compile
+	jdb -classpath $(CLASSPATH) FixedCapacityStackOfStrings
 
 libs:
 	mkdir -p libs
