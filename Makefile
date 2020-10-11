@@ -1,21 +1,22 @@
-bin?=PercolationStats.class
-src?=unionfind/PercolationStats.java
+bin?=LinkedStackOfStrings.class
+src?=LinkedStackOfStrings.java
+CLASSPATH=".:libs/algs4.jar"
 
 $(bin): $(src)
-	javac -cp ".:algs4.jar:unionfind" $(src) -g -Xlint:deprecation
-
+	javac -cp $(CLASSPATH) $(src) -g -Xlint:deprecation -Xlint:unchecked
 run: $(bin)
-	java -cp ".:algs4.jar:unionfind" PercolationStats 1000 1000
+	java -cp $(CLASSPATH) LinkedStackOfStrings < tobe.txt
 
 debug: $(bin)
-	jdb -classpath ".:algs4.jar:unionfind" PercolationStats
+	jdb -classpath $(CLASSPATH) LinkedStackOfStrings
 
 download_libs:
-	curl https://algs4.cs.princeton.edu/code/algs4.jar -o algs4.jar
-	unzip algs4.jar -d algs4
+	mkdir -p libs
+	curl https://algs4.cs.princeton.edu/code/algs4.jar -o libs/algs4.jar
+	unzip libs/algs4.jar -d libs/algs4
 
 tags: download_libs
 	ctags -R .
 
 clean:
-	rm -f $(bin)
+	rm *.class
