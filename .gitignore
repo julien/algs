@@ -1,7 +1,5 @@
 *.class
 *.jar
-*.out
-algs4/*
 libs/*
-tags
 out/*
+tags
