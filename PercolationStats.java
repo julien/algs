@@ -58,5 +58,4 @@ public final class PercolationStats {
         StdOut.println("stddev = " + ps.stddev());
         StdOut.println("95% confidence interval = " + confidence);
     }
-
 }

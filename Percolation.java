@@ -3,8 +3,8 @@ import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
 	private boolean[][] grid;
-	private int gridSize;
-	private int openSites;
+	private int size;
+	private int open;
 	private WeightedQuickUnionUF wquGrid;
 	private WeightedQuickUnionUF wquFull;
 	private int virtualTop;
@@ -15,16 +15,16 @@ public class Percolation {
 			throw new IllegalArgumentException("n must be > 0");
 		}
 
-		gridSize = n;
+		size = n;
 
-		int gridSizeSquared = n * n;
+		int sizeSquared = n * n;
 
-		grid = new boolean[gridSize][gridSize];
-		wquGrid = new WeightedQuickUnionUF(gridSizeSquared + 2);
-		wquFull = new WeightedQuickUnionUF(gridSizeSquared + 1);
-		virtualTop = gridSizeSquared;
-		virtualBottom = gridSizeSquared + 1;
-		openSites = 0;
+		grid = new boolean[size][size];
+		wquGrid = new WeightedQuickUnionUF(sizeSquared + 2);
+		wquFull = new WeightedQuickUnionUF(sizeSquared + 1);
+		virtualTop = sizeSquared;
+		virtualBottom = sizeSquared + 1;
+		open = 0;
 	}
 
 	public void open(int row, int col) {
@@ -40,14 +40,14 @@ public class Percolation {
 		int index = mapToGrid(row, col) - 1;
 
 		grid[r][c] = true;
-		openSites++;
+		open++;
 
 		if (row == 1) {
 			wquGrid.union(virtualTop, index);
 			wquFull.union(virtualTop, index);
 		}
 
-		if (row == gridSize) {
+		if (row == size) {
 			wquGrid.union(virtualBottom, index);
 		}
 
@@ -83,7 +83,7 @@ public class Percolation {
 	}
 
 	public int numberOfOpenSites() {
-		return openSites;
+		return open;
 	}
 
 	public boolean percolates() {
@@ -94,11 +94,11 @@ public class Percolation {
 		int r = row - 1;
 		int c = col - 1;
 
-		return (r >= 0 && c >= 0 && r < gridSize && c < gridSize);
+		return (r >= 0 && c >= 0 && r < size && c < size);
 	}
 
 	private int mapToGrid(int row, int col) {
-		return gridSize * (row - 1) + col;
+		return size * (row - 1) + col;
 	}
 
 	private void validate(int row, int col) {
@@ -109,19 +109,19 @@ public class Percolation {
 	}
 
 	public static void main(String args[]) {
-        int size = Integer.parseInt(args[0]);
+		int size = Integer.parseInt(args[0]);
 
-        Percolation percolation = new Percolation(size);
+		Percolation percolation = new Percolation(size);
 
-        for (int i = 1; i < args.length; i += 2) {
-            int row = Integer.parseInt(args[i]);
-            int col = Integer.parseInt(args[i + 1]);
+		for (int i = 1; i < args.length; i += 2) {
+			int row = Integer.parseInt(args[i]);
+			int col = Integer.parseInt(args[i + 1]);
 
-            percolation.open(row, col);
+			percolation.open(row, col);
 
-            if (percolation.percolates()) {
-                StdOut.printf("The System percolates");
-            }
-        }
+			if (percolation.percolates()) {
+				StdOut.printf("The System percolates");
+			}
+		}
 	}
 }
