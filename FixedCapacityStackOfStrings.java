@@ -15,7 +15,14 @@ public class FixedCapacityStackOfStrings {
 	}
 
 	String pop() {
-		return s[--N];
+		// Should throw an exception if stack is empty
+
+		// return s[--N];
+
+		// Avoids loitering
+		String item = s[--N];
+		s[N] = null;
+		return item;
 	}
 
 	boolean isEmpty() {
