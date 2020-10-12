@@ -2,13 +2,11 @@ import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
-	private boolean[][] grid;
+	private boolean[] grid;
 	private int size;
 	private int open;
 	private WeightedQuickUnionUF wquGrid;
 	private WeightedQuickUnionUF wquFull;
-	private int virtualTop;
-	private int virtualBottom;
 
 	public Percolation(int n) {
 		if (n <= 0) {
@@ -19,67 +17,67 @@ public class Percolation {
 
 		int sizeSquared = n * n;
 
-		grid = new boolean[size][size];
+		grid = new boolean[sizeSquared + 2];
 		wquGrid = new WeightedQuickUnionUF(sizeSquared + 2);
 		wquFull = new WeightedQuickUnionUF(sizeSquared + 1);
-		virtualTop = sizeSquared;
-		virtualBottom = sizeSquared + 1;
 		open = 0;
 	}
 
 	public void open(int row, int col) {
-		validate(row, col);
+		if (row < 1 || row > size || col < 1 || col > size) {
+			throw new IllegalArgumentException(
+				"Index out of bounds for row: " + row + ", column: " + col);
+		}
 
 		if (isOpen(row,  col)) {
 			return;
 		}
 
-		int r = row - 1;
-		int c = col - 1;
+		int index = mapToGrid(row, col);
+		grid[index] = true;
 
-		int index = mapToGrid(row, col) - 1;
-
-		grid[r][c] = true;
 		open++;
 
 		if (row == 1) {
-			wquGrid.union(virtualTop, index);
-			wquFull.union(virtualTop, index);
+			wquGrid.union(index, 0);
+			wquFull.union(index, 0);
 		}
-
 		if (row == size) {
-			wquGrid.union(virtualBottom, index);
+			wquGrid.union(index, size * size + 1);
 		}
 
-		if (isInBounds(row, col - 1) && isOpen(row, col - 1)) {
-			wquGrid.union(index, mapToGrid(row, col - 1) - 1);
-			wquFull.union(index, mapToGrid(row, col - 1) - 1);
+		if (row < size && isOpen(row + 1, col)) {
+			wquGrid.union(index, mapToGrid(row + 1, col));
+			wquFull.union(index, mapToGrid(row + 1, col));
 		}
-
-		if (isInBounds(row, col + 1) && isOpen(row, col + 1)) {
-			wquGrid.union(index, mapToGrid(row, col + 1) - 1);
-			wquFull.union(index, mapToGrid(row, col + 1) - 1);
+		if (row > 1 && isOpen(row - 1, col)) {
+			wquGrid.union(index, mapToGrid(row - 1, col));
+			wquFull.union(index, mapToGrid(row - 1, col));
 		}
-
-		if (isInBounds(row - 1, col) && isOpen(row - 1, col)) {
-			wquGrid.union(index, mapToGrid(row - 1, col) - 1);
-			wquFull.union(index, mapToGrid(row - 1, col) - 1);
+		if (col < size && isOpen(row, col + 1)) {
+			wquGrid.union(index, mapToGrid(row, col + 1));
+			wquFull.union(index, mapToGrid(row, col + 1));
 		}
-
-		if (isInBounds(row + 1, col) && isOpen(row + 1, col)) {
-			wquGrid.union(index, mapToGrid(row + 1, col) - 1);
-			wquFull.union(index, mapToGrid(row + 1, col) - 1);
+		if (col > 1 && isOpen(row, col - 1)) {
+			wquGrid.union(index, mapToGrid(row, col - 1));
+			wquFull.union(index, mapToGrid(row, col - 1));
 		}
 	}
 
 	public boolean isOpen(int row, int col) {
-		validate(row, col);
-		return grid[row - 1][col - 1];
+		if (row < 1 || row > size || col < 1 || col > size) {
+			throw new IllegalArgumentException(
+				"Index out of bounds for row: " + row + ", column: " + col);
+		}
+		return grid[mapToGrid(row, col)];
 	}
 
 	public boolean isFull(int row, int col) {
-		validate(row, col);
-		return wquFull.find(virtualTop) == wquFull.find(mapToGrid(row, col) - 1);
+		if (row < 1 || row > size || col < 1 || col > size) {
+			throw new IllegalArgumentException(
+				"Index out of bounds for row: " + row + ", column: " + col);
+		}
+		return wquFull.find(0) == wquFull.find(mapToGrid(row, col) - 1);
 	}
 
 	public int numberOfOpenSites() {
@@ -87,25 +85,11 @@ public class Percolation {
 	}
 
 	public boolean percolates() {
-		return wquGrid.find(virtualTop) == wquGrid.find(virtualBottom);
-	}
-
-	private boolean isInBounds(int row, int col) {
-		int r = row - 1;
-		int c = col - 1;
-
-		return (r >= 0 && c >= 0 && r < size && c < size);
+		return wquGrid.find(0) == wquGrid.find(size * size + 1);
 	}
 
 	private int mapToGrid(int row, int col) {
 		return size * (row - 1) + col;
-	}
-
-	private void validate(int row, int col) {
-		if (!isInBounds(row, col)) {
-			throw new IllegalArgumentException(
-					"Index out of bounds for row: " + row + ", column: " + col);
-		}
 	}
 
 	public static void main(String args[]) {
@@ -120,7 +104,7 @@ public class Percolation {
 			percolation.open(row, col);
 
 			if (percolation.percolates()) {
-				StdOut.printf("The System percolates");
+				StdOut.printf("The System percolates %n");
 			}
 		}
 	}
