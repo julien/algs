@@ -44,8 +44,8 @@ public final class PercolationStats {
 	}
 
 	public static void main(String[] args) {
-		int n = 10;
-		int trials = 10;
+		int n = 100;
+		int trials = 100;
 
 		if (args.length >= 2) {
 			n = Integer.parseInt(args[0]);
@@ -54,7 +54,7 @@ public final class PercolationStats {
 
 		PercolationStats ps = new PercolationStats(n, trials);
 		String confidence = ps.confidenceLo() + ", " + ps.confidenceHi();
-		StdOut.println("mean = %d" + ps.mean());
+		StdOut.println("mean = " + ps.mean());
 		StdOut.println("stddev = " + ps.stddev());
 		StdOut.println("95% confidence interval = " + confidence);
 	}
