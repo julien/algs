@@ -1,5 +1,6 @@
 *.class
 *.jar
-libs/*
+bin/*
+lib/*
 out/*
 tags
