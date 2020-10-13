@@ -1,7 +1,7 @@
-CLASSPATH=".:libs/algs4.jar"
+CLASSPATH=".:bin:lib/algs4.jar:src"
 
 compile:
-	javac -cp $(CLASSPATH) FixedCapacityStackOfStrings.java -g -Xlint:deprecation -Xlint:unchecked
+	javac -cp $(CLASSPATH) src/FixedCapacityStackOfStrings.java -g -Xlint:deprecation -Xlint:unchecked -d bin
 
 run: compile
 	java -cp $(CLASSPATH) FixedCapacityStackOfStrings < tobe.txt
@@ -9,8 +9,8 @@ run: compile
 debug: compile
 	jdb -classpath $(CLASSPATH) FixedCapacityStackOfStrings
 
-libs:
-	mkdir -p libs
-	curl https://algs4.cs.princeton.edu/code/algs4.jar -o libs/algs4.jar
-	unzip libs/algs4.jar -d libs/algs4
+lib:
+	mkdir -p lib
+	curl https://algs4.cs.princeton.edu/code/algs4.jar -o lib/algs4.jar
+	unzip lib/algs4.jar -d lib/algs4
 
