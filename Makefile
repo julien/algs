@@ -1,7 +1,8 @@
 CLASSPATH=".:bin:lib/algs4.jar:src"
 
 compile:
-	javac -cp $(CLASSPATH) src/FixedCapacityStackOfStrings.java -g -Xlint:deprecation -Xlint:unchecked -d bin
+	javac -cp $(CLASSPATH) src/FixedCapacityStackOfStrings.java \
+		-g -Xlint:deprecation -Xlint:unchecked -d bin
 
 run: compile
 	java -cp $(CLASSPATH) FixedCapacityStackOfStrings < tobe.txt
