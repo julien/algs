@@ -1,14 +1,14 @@
 CLASSPATH=".:bin:lib/algs4.jar:src"
 
 compile:
-	javac -cp $(CLASSPATH) src/FixedCapacityStackOfStrings.java \
+	javac -cp $(CLASSPATH) src/ResizingArrayStackOfStrings.java \
 		-g -Xlint:deprecation -Xlint:unchecked -d bin
 
 run: compile
-	java -cp $(CLASSPATH) FixedCapacityStackOfStrings < tobe.txt
+	java -cp $(CLASSPATH) ResizingArrayStackOfStrings < tobe.txt
 
 debug: compile
-	jdb -classpath $(CLASSPATH) FixedCapacityStackOfStrings
+	jdb -classpath $(CLASSPATH) ResizingArrayStackOfStrings
 
 lib:
 	mkdir -p lib
