@@ -31,15 +31,6 @@ public class BottomUpMergeSort {
 		assert isSorted(a, lo, hi);
 	}
 
-	private static void sort(Comparable[] a, Comparable[] aux, int lo, int hi) {
-		if (hi <= lo) return;
-		int mid = lo + (hi - lo) / 2;
-		sort(a, aux, lo, mid);
-		sort(a, aux, mid+1, hi);
-		if (!less(a[mid+1], a[mid])) return;
-		merge(a, lo, mid, hi);
-	}
-
 	public static void sort(Comparable[] a) {
 		int N = a.length;
 		aux = new Comparable[N];
