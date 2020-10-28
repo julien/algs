@@ -1,14 +1,14 @@
 CLASSPATH=".:bin:lib/algs4.jar:src"
 
 compile:
-	javac -cp $(CLASSPATH) src/Permutation.java \
+	javac -cp $(CLASSPATH) src/FastCollinearPoints.java \
 		-g -Xlint:deprecation -Xlint:unchecked -d bin
 
 run: compile
-	java -cp $(CLASSPATH) Permutation 3 < duplicates.txt
+	java -cp $(CLASSPATH) FastCollinearPoints input8.txt
 
 debug: compile
-	jdb -classpath $(CLASSPATH) Permutation
+	jdb -classpath $(CLASSPATH) FastCollinearPoints
 
 lib:
 	mkdir -p lib
