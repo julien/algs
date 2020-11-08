@@ -1,14 +1,14 @@
 CLASSPATH=".:bin:lib/algs4.jar:src"
 
 compile:
-	javac -cp $(CLASSPATH) src/FastCollinearPoints.java \
+	javac -cp $(CLASSPATH) src/UnorderedMaxPQ.java \
 		-g -Xlint:deprecation -Xlint:unchecked -d bin
 
 run: compile
-	java -cp $(CLASSPATH) FastCollinearPoints input8.txt
+	java -cp $(CLASSPATH) UnorderedMaxPQ 10 < unordered.txt
 
 debug: compile
-	jdb -classpath $(CLASSPATH) FastCollinearPoints
+	jdb -classpath $(CLASSPATH) UnorderedMaxPQ
 
 lib:
 	mkdir -p lib
