@@ -1,14 +1,14 @@
 CLASSPATH=".:bin:lib/algs4.jar:src"
 
 compile:
-	javac -cp $(CLASSPATH) src/UnorderedMaxPQ.java \
+	javac -cp $(CLASSPATH) src/Solver.java \
 		-g -Xlint:deprecation -Xlint:unchecked -d bin
 
 run: compile
-	java -cp $(CLASSPATH) UnorderedMaxPQ 10 < unordered.txt
+	java -cp $(CLASSPATH) Solver puzzle04.txt
 
 debug: compile
-	jdb -classpath $(CLASSPATH) UnorderedMaxPQ
+	jdb -classpath $(CLASSPATH) Solver puzzle04.txt
 
 lib:
 	mkdir -p lib
